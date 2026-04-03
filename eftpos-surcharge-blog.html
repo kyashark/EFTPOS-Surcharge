@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is Your EFTPOS Surcharge Too High? | Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0d0d;
+    --red: #c0392b;
+    --gold: #d4a017;
+    --cream: #faf8f3;
+    --mid: #444;
+    --light: #f0ede6;
+    --border: #e0dbd0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--black);
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--black);
+    color: white;
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(192,57,43,0.18);
+    filter: blur(80px);
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    max-width: 800px;
+    margin-bottom: 24px;
+  }
+  .hero h1 span { color: var(--red); }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: #ccc;
+    max-width: 580px;
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 28px;
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .hero-meta span { color: #ccc; font-weight: 500; }
+
+  /* ARTICLE */
+  article {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  /* CALLOUT BOX */
+  .callout {
+    background: var(--black);
+    color: white;
+    border-left: 4px solid var(--red);
+    padding: 22px 28px;
+    margin: 40px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .callout strong {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .callout p { font-size: 1.05rem; line-height: 1.65; }
+
+  /* STAT BLOCKS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 40px 0;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 24px 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label { font-size: 0.82rem; color: var(--mid); font-weight: 500; }
+
+  /* WHAT IS ILLEGAL */
+  .illegal-box {
+    background: #fff5f5;
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 40px 0;
+  }
+  .illegal-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+  .illegal-list { list-style: none; }
+  .illegal-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5d5d5;
+    font-size: 0.95rem;
+    color: var(--black);
+  }
+  .illegal-list li:last-child { border-bottom: none; }
+  .x-icon { color: var(--red); font-weight: 900; font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+  /* ALLOWED COSTS */
+  .allowed-box {
+    background: #f0faf4;
+    border: 2px solid #27ae60;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 40px 0;
+  }
+  .allowed-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #27ae60;
+    margin-bottom: 18px;
+  }
+  .check-list { list-style: none; }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #c8ebd4;
+    font-size: 0.95rem;
+  }
+  .check-list li:last-child { border-bottom: none; }
+  .check-icon { color: #27ae60; font-weight: 900; font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+  /* SECTION HEADINGS */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 50px 0 16px;
+    color: var(--black);
+  }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 32px 0 10px;
+    color: var(--black);
+  }
+  p { margin-bottom: 18px; font-size: 1rem; color: #333; }
+
+  /* PENALTY BOX */
+  .penalty {
+    background: linear-gradient(135deg, #1a1a1a, #2d0a0a);
+    color: white;
+    border-radius: 10px;
+    padding: 32px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .penalty::before {
+    content: '⚠';
+    position: absolute;
+    right: 24px;
+    top: 18px;
+    font-size: 4rem;
+    opacity: 0.12;
+  }
+  .penalty h3 { color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; letter-spacing: 1px; text-transform: uppercase; }
+  .penalty p { color: #ddd; font-size: 0.98rem; margin-bottom: 12px; }
+  .pen-amounts {
+    display: flex;
+    gap: 24px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+  .pen-item {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 14px 20px;
+    flex: 1;
+    min-width: 140px;
+  }
+  .pen-item .amount { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--red); }
+  .pen-item .desc { font-size: 0.78rem; color: #aaa; margin-top: 4px; }
+
+  /* TIMELINE */
+  .timeline {
+    border-left: 3px solid var(--gold);
+    padding-left: 28px;
+    margin: 40px 0;
+  }
+  .tl-item { position: relative; margin-bottom: 30px; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -37px; top: 5px;
+    width: 14px; height: 14px;
+    background: var(--gold);
+    border-radius: 50%;
+    border: 3px solid var(--cream);
+  }
+  .tl-date { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+  .tl-title { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+  .tl-desc { font-size: 0.9rem; color: var(--mid); }
+
+  /* CONSUMER TIPS */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 36px 0;
+  }
+  .tip-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .tip-icon { font-size: 1.8rem; margin-bottom: 12px; }
+  .tip-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; color: var(--black); }
+  .tip-card p { font-size: 0.85rem; color: var(--mid); margin: 0; }
+
+  /* QUOTE */
+  blockquote {
+    border-left: 4px solid var(--gold);
+    padding: 16px 24px;
+    margin: 36px 0;
+    background: white;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #444;
+    font-size: 1.05rem;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* FOOTER */
+  .blog-footer {
+    background: var(--black);
+    color: #888;
+    text-align: center;
+    padding: 36px 24px;
+    font-size: 0.82rem;
+    margin-top: 60px;
+  }
+  .blog-footer a { color: var(--gold); text-decoration: none; }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 48px 0;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 50px 20px 40px; }
+    .pen-amounts { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Consumer Rights · Australia</div>
+  <h1>Is Your EFTPOS Surcharge <span>Too High?</span> Here's What the Law Actually Says</h1>
+  <p class="hero-sub">Australian businesses are charging billions in payment surcharges — but many are breaking the law. What you need to know as a consumer or business owner.</p>
+  <div class="hero-meta">
+    By <span>Finance Desk</span> &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; 8 min read
+  </div>
+</div>
+
+<!-- ARTICLE -->
+<article>
+
+  <p>Next time you tap your card and see a small surcharge pop up on the screen, you might just accept it and move on. But here's what most Australians don't know: <strong>a lot of those surcharges are actually illegal.</strong></p>
+
+  <p>The Australian Government, backed by the Australian Competition and Consumer Commission (ACCC), has very clear rules about how much a business can charge you when you pay by card — and many businesses are quietly exceeding those limits every single day.</p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">$1.2B</div>
+      <div class="stat-label">Paid by Australians in surcharges yearly</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">~$60</div>
+      <div class="stat-label">Per card-using adult per year</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">2,500+</div>
+      <div class="stat-label">ACCC complaints in 18 months to June 2024</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">Oct 2026</div>
+      <div class="stat-label">Planned ban on all EFTPOS surcharges</div>
+    </div>
+  </div>
+
+  <h2>The Basic Rule: You Can Only Charge What It Costs You</h2>
+
+  <p>Under the <strong>Competition and Consumer Act 2010</strong>, it is illegal for any Australian business — large or small — to charge a card surcharge that exceeds their actual "cost of acceptance." This is the real cost the business pays to process your payment. Nothing more, nothing less.</p>
+
+  <div class="callout">
+    <strong>Australian Government — ACCC</strong>
+    <p>"Businesses are not allowed to charge more than their actual costs to process a payment."</p>
+  </div>
+
+  <p>This rule was first introduced in 2017 and applies to EFTPOS, Mastercard, Visa, and certain American Express cards. The ACCC is the watchdog responsible for enforcing it — and in 2025, cracking down on excessive surcharges became one of their <em>top enforcement priorities.</em></p>
+
+  <h2>What's Illegal to Include in a Surcharge?</h2>
+
+  <div class="illegal-box">
+    <h3>❌ Businesses CANNOT Charge for These</h3>
+    <ul class="illegal-list">
+      <li><span class="x-icon">✕</span><span><strong>POS Hardware Costs</strong> — The cost of your payment terminal, iPad stand, or EFTPOS machine cannot be passed on to customers as a surcharge.</span></li>
+      <li><span class="x-icon">✕</span><span><strong>Extra Margin or Profit</strong> — A surcharge cannot be used as a sneaky way to earn extra revenue. It's strictly cost recovery only.</span></li>
+      <li><span class="x-icon">✕</span><span><strong>Software & Business Tools</strong> — Fees for inventory management systems, data analytics tools, or invoicing software bundled with a payment plan cannot be included.</span></li>
+      <li><span class="x-icon">✕</span><span><strong>Flat 2.2% or Industry Averages</strong> — Simply applying a round number without proving your actual costs is a violation.</span></li>
+    </ul>
+  </div>
+
+  <div class="allowed-box">
+    <h3>✅ What CAN Be Included in Cost of Acceptance</h3>
+    <ul class="check-list">
+      <li><span class="check-icon">✓</span><span>Merchant service fees charged by your bank or payment service provider (PSP)</span></li>
+      <li><span class="check-icon">✓</span><span>Terminal rental and maintenance fees directly tied to card payment processing</span></li>
+      <li><span class="check-icon">✓</span><span>Card payment fraud prevention service fees</span></li>
+      <li><span class="check-icon">✓</span><span>Other verifiable direct costs shown on your merchant statement</span></li>
+    </ul>
+  </div>
+
+  <h2>What Are Typical Legitimate Surcharge Rates?</h2>
+
+  <p>The Reserve Bank of Australia (RBA) provides guidance on what it typically costs merchants to accept different card types. These aren't hard limits — your actual costs may differ — but they give a useful benchmark:</p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:1.8rem;">&lt; 0.5%</div>
+      <div class="stat-label">EFTPOS debit card payments</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:1.8rem;">0.5–1%</div>
+      <div class="stat-label">Visa / Mastercard Debit</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:1.8rem;">1–1.5%</div>
+      <div class="stat-label">Visa / Mastercard Credit</div>
+    </div>
+  </div>
+
+  <p>So if a café is charging you <strong>2.2%</strong> on a simple debit card tap — as shown in the viral warning image circulating online — that almost certainly <strong>exceeds their actual cost</strong> and is likely illegal.</p>
+
+  <blockquote>
+    "These were repetitive instances. It looked like the coffee was $5, but then there's an additional 50 cents — so $5.50. That matters."
+    <cite>— Gina Cass-Gottlieb, ACCC Chair, 2025</cite>
+  </blockquote>
+
+  <h2>The Consequences for Businesses Breaking the Rules</h2>
+
+  <div class="penalty">
+    <h3>⚠ Penalties for Excessive Surcharging</h3>
+    <p>The ACCC takes enforcement action against businesses that overcharge, ranging from infringement notices to court-ordered penalties.</p>
+    <div class="pen-amounts">
+      <div class="pen-item">
+        <div class="amount">$126K</div>
+        <div class="desc">Max penalty per infringement notice</div>
+      </div>
+      <div class="pen-item">
+        <div class="amount">$1.3M+</div>
+        <div class="desc">Court-ordered penalties for serious cases</div>
+      </div>
+      <div class="pen-item">
+        <div class="amount">$2.1M</div>
+        <div class="desc">Govt funding given to ACCC for 2025 crackdown</div>
+      </div>
+    </div>
+  </div>
+
+  <p>The ACCC has already taken action against well-known companies including Fitness First, Nine Entertainment, Europcar, Red Balloon, and Lloyds Auctioneers for excessive surcharging. Small businesses are equally liable — the ACCC made it clear that company size does not exempt anyone from these rules.</p>
+
+  <h2>The Big Change Coming in 2026</h2>
+
+  <p>The entire surcharging landscape is about to change dramatically. After a sweeping review of Australia's payment system, the RBA has proposed an outright ban on EFTPOS, Mastercard, and Visa surcharges.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">2017</div>
+      <div class="tl-title">Excessive Surcharge Ban Introduced</div>
+      <div class="tl-desc">ACCC given enforcement powers against surcharges exceeding cost of acceptance.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Oct 2024</div>
+      <div class="tl-title">Government Signals Debit Ban</div>
+      <div class="tl-desc">Treasurer Jim Chalmers announces plans to ban debit card surcharges, pending RBA review.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Jul 2025</div>
+      <div class="tl-title">RBA Consultation Paper Released</div>
+      <div class="tl-desc">RBA proposes banning surcharges on EFTPOS, Mastercard, and Visa from July 2026, saving consumers an estimated $1.2 billion per year.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1 Oct 2026</div>
+      <div class="tl-title">Full Surcharge Ban Takes Effect</div>
+      <div class="tl-desc">Surcharging on designated card networks to be removed. Lower interchange fees for merchants to offset the change. 90% of small merchants expected to benefit.</div>
+    </div>
+  </div>
+
+  <p>The reforms also include <strong>lower interchange fee caps</strong> for merchants and greater transparency from payment service providers — addressing long-standing complaints that PSPs have been bundling non-payment services into their fees, inflating the "cost of acceptance" merchants report.</p>
+
+  <div class="divider"></div>
+
+  <h2>What Should You Do Right Now?</h2>
+
+  <h3>If You're a Consumer:</h3>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">👀</div>
+      <h4>Watch the Surcharge %</h4>
+      <p>If a debit card surcharge exceeds ~0.5–1%, question it. Anything near 2%+ on debit is almost certainly excessive.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📢</div>
+      <h4>Report It to the ACCC</h4>
+      <p>Lodge a complaint at accc.gov.au. Your report contributes to enforcement action and helps protect other consumers.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💳</div>
+      <h4>Use EFTPOS to Save</h4>
+      <p>Insert your card and select "Savings" instead of tapping — this routes through the cheaper EFTPOS network and may attract a lower surcharge.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💸</div>
+      <h4>Pay Cash if Available</h4>
+      <p>Where accepted, cash remains surcharge-free. Some businesses offer a cash discount precisely because they want to reduce card fees.</p>
+    </div>
+  </div>
+
+  <h3>If You're a Business Owner:</h3>
+
+  <p><strong>Check your merchant statement now.</strong> Your bank or PSP should provide a statement showing your actual cost of acceptance as a percentage. Use that figure — and only that figure — as your surcharge. If you're charging more, you're legally exposed.</p>
+
+  <p>Key obligations every business must meet:</p>
+  <ul style="padding-left:20px; margin-bottom:18px; color:#333;">
+    <li style="margin-bottom:8px;">Your surcharge must <strong>never exceed your actual cost of acceptance</strong></li>
+    <li style="margin-bottom:8px;">You must be able to <strong>prove your costs</strong> if asked</li>
+    <li style="margin-bottom:8px;">If you charge a single rate across multiple card types, it must be the <strong>lowest of all individual rates</strong></li>
+    <li style="margin-bottom:8px;">Surcharges must be <strong>clearly disclosed before the customer pays</strong></li>
+    <li style="margin-bottom:8px;">If no surcharge-free payment option exists, include the minimum surcharge <strong>in the displayed price</strong></li>
+  </ul>
+
+  <div class="callout">
+    <strong>Important Note for Business Owners</strong>
+    <p>With the October 2026 ban approaching, now is the time to start planning how your pricing will absorb payment processing costs directly — whether through slightly adjusted retail prices or by negotiating better rates with your PSP.</p>
+  </div>
+
+  <h2>The Bottom Line</h2>
+
+  <p>The message from the Australian Government is unambiguous: <strong>surcharging is a cost-recovery tool, not a profit centre.</strong> Whether you're a corner café or a national retailer, the rules are the same. You can only charge what it actually costs you to process a payment — and you must be able to prove it.</p>
+
+  <p>With the ACCC making surcharge enforcement a top 2025–26 priority, and a full surcharge ban arriving in October 2026, Australian businesses and consumers alike need to understand these rules today.</p>
+
+  <p>If something feels wrong at the checkout — it probably is. And now you know exactly what to do about it.</p>
+
+  <div class="divider"></div>
+
+  <p style="font-size:0.85rem; color:#888;"><strong>Sources:</strong> Australian Competition and Consumer Commission (ACCC), Reserve Bank of Australia (RBA), Australian Banking Association, Canstar, Prime Minister of Australia media releases, Kelly Partners.</p>
+
+</article>
+
+<div class="blog-footer">
+  <p>Information sourced from <a href="https://www.accc.gov.au">ACCC</a>, <a href="https://www.rba.gov.au">RBA</a> &amp; Australian Government. For personal financial or legal advice, consult a qualified professional.</p>
+  <p style="margin-top:8px;">© 2026 · All rights reserved</p>
+</div>
+
+</body>
+</html>
